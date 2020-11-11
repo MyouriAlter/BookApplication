@@ -68,9 +68,18 @@ namespace DataObjects.AdoNet
             {
                 using (var command = CreateCommand(sql, connection, parms))
                 {
+                    
                     command.CommandType = CommandType.StoredProcedure;
                     //return int.Parse(command.ExecuteScalar().ToString());
-                    return command.ExecuteNonQuery();
+                    try
+                    {
+                        return command.ExecuteNonQuery();
+
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                 }
             }
 

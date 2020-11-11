@@ -26,10 +26,10 @@ namespace WinForms.Presenters
         /// <summary>
         /// Perform login. Gets data from view and calls model.
         /// </summary>
-        public bool Login()
+        public bool Login(string username, string password)
         {
-            string username = View.Username;
-            string password = View.Password;
+            username = View.Username;
+            password = View.Password;
 
             return Model.Login(username, password);
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WinFroms.Models.Models;
+using WinForms.Models.Models;
 
 namespace WinForms.Models
 {
@@ -24,6 +24,7 @@ namespace WinForms.Models
         void AddBooks(BookModel book);
         void UpdateBooks(BookModel book);
         void DeleteBooks(int bookID);
+        void UpdateBookQuantity(int BookID, int Quantity);
 
         void AddCustomers(CustomerModel customer);
         void UpdateCustomers(CustomerModel customer);

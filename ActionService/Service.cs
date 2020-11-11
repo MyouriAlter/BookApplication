@@ -21,7 +21,14 @@ namespace ActionService
 
         public bool AddCustomer(Customers customer)
         {
-            return customerDAO.AddCustomer(customer);
+            try
+            {
+                return customerDAO.AddCustomer(customer);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public bool AddNewBook(Books book)
@@ -114,6 +121,11 @@ namespace ActionService
             return booksDAO.UpdateBook(book);
         }
 
+        public bool UpdateBookQuantity(int BookID, int Quantity)
+        {
+            return booksDAO.UpdateBookQuantity(BookID, Quantity);
+        }
+
         public bool UpdateCustomer(Customers customer)
         {
             return customerDAO.UpdateCustomer(customer);
@@ -128,5 +140,7 @@ namespace ActionService
         {
             return booksDAO.GetBooksByTitle(BookTitle);
         }
+
+        
     }
 }

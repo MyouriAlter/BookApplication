@@ -16,7 +16,7 @@ namespace WinForms.Presenters
     /// </remarks>
     public class BookPresenter : Presenter<IBookView>
     {
-        public frmManager FrmManager { get; }
+        public frmMain FrmManager { get; }
 
         /// <summary>
         /// Constructor
@@ -74,9 +74,14 @@ namespace WinForms.Presenters
         /// </summary>
         /// <param name="bookID">The book to delete</param>
         /// <returns>Number of records affected.</returns>
-        public void Delete()
+        public void Delete(int bookID)
         {
-            Model.DeleteBooks(View.ID);
+            Model.DeleteBooks(bookID);
+        }
+
+        public void UpdateBookQuantity(int bookID, int quantity)
+        {
+            Model.UpdateBookQuantity(bookID, quantity);
         }
 
     }

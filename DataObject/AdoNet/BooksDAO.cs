@@ -50,6 +50,13 @@ namespace DataObject.AdoNet
             return db.Read(sql, Make, TakeTitle(BookTitle)).ToList();
         }
 
+        public bool UpdateBookQuantity(int BookID, int Quantity)
+        {
+            string sql = "spUpdateBookQuantity";
+            object[] parms = { "@BookID", BookID, "@Quantity", Quantity };
+            return db.Update(sql, parms) > 0;
+        }
+
         // creates a Books object based on DataReader
         static Func<IDataReader, Books> Make = reader =>
         new Books
@@ -95,6 +102,6 @@ namespace DataObject.AdoNet
             };
         }
 
-
+        
     }
 }

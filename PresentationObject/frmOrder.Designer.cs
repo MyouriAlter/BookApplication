@@ -1,4 +1,4 @@
-﻿namespace WinFroms
+﻿namespace WinForms
 {
     partial class frmOrder
     {
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCancelOrder = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.lbTotalPrice = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnAddBook = new System.Windows.Forms.Button();
@@ -57,17 +57,8 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.txtCustomerName = new System.Windows.Forms.TextBox();
-            this.mskPhoneNo = new System.Windows.Forms.MaskedTextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.btnConfirmOrder = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
+            this.btnCancelOrder = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -81,29 +72,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnCancelOrder
-            // 
-            this.btnCancelOrder.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancelOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelOrder.Location = new System.Drawing.Point(484, 0);
-            this.btnCancelOrder.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancelOrder.Name = "btnCancelOrder";
-            this.btnCancelOrder.Size = new System.Drawing.Size(120, 64);
-            this.btnCancelOrder.TabIndex = 2;
-            this.btnCancelOrder.TabStop = false;
-            this.btnCancelOrder.Text = "Cancel Order";
-            this.btnCancelOrder.UseVisualStyleBackColor = true;
-            this.btnCancelOrder.Click += new System.EventHandler(this.btnCancelOrder_Click);
             // 
             // panel1
             // 
@@ -111,11 +86,25 @@
             this.panel1.Controls.Add(this.lbTotalPrice);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 297);
+            this.panel1.Location = new System.Drawing.Point(0, 437);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(604, 31);
             this.panel1.TabIndex = 4;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(558, 8);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label10.Size = new System.Drawing.Size(42, 17);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Dong";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbTotalPrice
             // 
@@ -240,24 +229,15 @@
             this.numQuantity.Location = new System.Drawing.Point(110, 351);
             this.numQuantity.Margin = new System.Windows.Forms.Padding(2);
             this.numQuantity.Maximum = new decimal(new int[] {
-            10000,
             0,
-            0,
-            0});
-            this.numQuantity.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
             this.numQuantity.Name = "numQuantity";
-            this.numQuantity.Size = new System.Drawing.Size(78, 23);
+            this.numQuantity.Size = new System.Drawing.Size(115, 23);
             this.numQuantity.TabIndex = 14;
+            this.numQuantity.TabStop = false;
             this.numQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numQuantity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // txtPrice
             // 
@@ -265,8 +245,10 @@
             this.txtPrice.Location = new System.Drawing.Point(81, 322);
             this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(107, 23);
+            this.txtPrice.Size = new System.Drawing.Size(144, 23);
             this.txtPrice.TabIndex = 8;
+            this.txtPrice.TabStop = false;
+            this.txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtPublisher
             // 
@@ -274,8 +256,9 @@
             this.txtPublisher.Location = new System.Drawing.Point(17, 235);
             this.txtPublisher.Margin = new System.Windows.Forms.Padding(2);
             this.txtPublisher.Name = "txtPublisher";
-            this.txtPublisher.Size = new System.Drawing.Size(257, 23);
+            this.txtPublisher.Size = new System.Drawing.Size(267, 23);
             this.txtPublisher.TabIndex = 7;
+            this.txtPublisher.TabStop = false;
             // 
             // txtAuthor
             // 
@@ -284,8 +267,9 @@
             this.txtAuthor.Margin = new System.Windows.Forms.Padding(2);
             this.txtAuthor.Multiline = true;
             this.txtAuthor.Name = "txtAuthor";
-            this.txtAuthor.Size = new System.Drawing.Size(257, 59);
+            this.txtAuthor.Size = new System.Drawing.Size(267, 59);
             this.txtAuthor.TabIndex = 6;
+            this.txtAuthor.TabStop = false;
             // 
             // label9
             // 
@@ -350,8 +334,9 @@
             this.cmbBookTitle.Location = new System.Drawing.Point(17, 84);
             this.cmbBookTitle.Margin = new System.Windows.Forms.Padding(2);
             this.cmbBookTitle.Name = "cmbBookTitle";
-            this.cmbBookTitle.Size = new System.Drawing.Size(241, 25);
+            this.cmbBookTitle.Size = new System.Drawing.Size(267, 25);
             this.cmbBookTitle.TabIndex = 5;
+            this.cmbBookTitle.TabStop = false;
             this.cmbBookTitle.SelectedIndexChanged += new System.EventHandler(this.cmbBookTitle_SelectedIndexChanged_1);
             // 
             // splitContainer3
@@ -367,13 +352,9 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.splitContainer4);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.btnConfirmOrder);
-            this.splitContainer3.Panel2.Controls.Add(this.btnCancelOrder);
+            this.splitContainer3.Panel2Collapsed = true;
             this.splitContainer3.Size = new System.Drawing.Size(606, 539);
-            this.splitContainer3.SplitterDistance = 470;
+            this.splitContainer3.SplitterDistance = 150;
             this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 6;
             // 
@@ -389,14 +370,15 @@
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.dgvOrderDetails);
             this.splitContainer4.Panel1.Controls.Add(this.panel1);
+            this.splitContainer4.Panel1.Controls.Add(this.dgvOrderDetails);
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer4.Size = new System.Drawing.Size(606, 470);
-            this.splitContainer4.SplitterDistance = 330;
+            this.splitContainer4.Panel2.Controls.Add(this.btnConfirmOrder);
+            this.splitContainer4.Panel2.Controls.Add(this.btnCancelOrder);
+            this.splitContainer4.Size = new System.Drawing.Size(606, 539);
+            this.splitContainer4.SplitterDistance = 470;
             this.splitContainer4.SplitterWidth = 3;
             this.splitContainer4.TabIndex = 0;
             // 
@@ -417,7 +399,7 @@
             this.dgvOrderDetails.MultiSelect = false;
             this.dgvOrderDetails.Name = "dgvOrderDetails";
             this.dgvOrderDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrderDetails.Size = new System.Drawing.Size(604, 297);
+            this.dgvOrderDetails.Size = new System.Drawing.Size(604, 468);
             this.dgvOrderDetails.TabIndex = 5;
             // 
             // Column7
@@ -455,108 +437,6 @@
             this.Column6.HeaderText = "SubPrice";
             this.Column6.Name = "Column6";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtEmail);
-            this.groupBox1.Controls.Add(this.txtAddress);
-            this.groupBox1.Controls.Add(this.txtCustomerName);
-            this.groupBox1.Controls.Add(this.mskPhoneNo);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(604, 135);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Customer Infomation";
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(150, 103);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(216, 23);
-            this.txtEmail.TabIndex = 16;
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(150, 77);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(2);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(354, 23);
-            this.txtAddress.TabIndex = 15;
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomerName.Location = new System.Drawing.Point(150, 22);
-            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(216, 23);
-            this.txtCustomerName.TabIndex = 13;
-            // 
-            // mskPhoneNo
-            // 
-            this.mskPhoneNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mskPhoneNo.Location = new System.Drawing.Point(150, 50);
-            this.mskPhoneNo.Margin = new System.Windows.Forms.Padding(2);
-            this.mskPhoneNo.Mask = "(+84) 000-000-0000";
-            this.mskPhoneNo.Name = "mskPhoneNo";
-            this.mskPhoneNo.Size = new System.Drawing.Size(139, 23);
-            this.mskPhoneNo.TabIndex = 14;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(21, 23);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(122, 18);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Customer Name:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(21, 50);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 18);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Phone No.:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(21, 78);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 18);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "Address:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(21, 104);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 18);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Email:";
-            // 
             // btnConfirmOrder
             // 
             this.btnConfirmOrder.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -565,33 +445,38 @@
             this.btnConfirmOrder.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmOrder.Name = "btnConfirmOrder";
             this.btnConfirmOrder.Size = new System.Drawing.Size(484, 64);
-            this.btnConfirmOrder.TabIndex = 3;
+            this.btnConfirmOrder.TabIndex = 5;
             this.btnConfirmOrder.TabStop = false;
             this.btnConfirmOrder.Text = "Confirm Order";
             this.btnConfirmOrder.UseVisualStyleBackColor = true;
             this.btnConfirmOrder.Click += new System.EventHandler(this.btnConfirmOrder_Click);
             // 
-            // label10
+            // btnCancelOrder
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(558, 8);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label10.Size = new System.Drawing.Size(42, 17);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Dong";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancelOrder.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelOrder.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCancelOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelOrder.Location = new System.Drawing.Point(484, 0);
+            this.btnCancelOrder.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancelOrder.Name = "btnCancelOrder";
+            this.btnCancelOrder.Size = new System.Drawing.Size(120, 64);
+            this.btnCancelOrder.TabIndex = 4;
+            this.btnCancelOrder.TabStop = false;
+            this.btnCancelOrder.Text = "Cancel Order";
+            this.btnCancelOrder.UseVisualStyleBackColor = true;
+            this.btnCancelOrder.Click += new System.EventHandler(this.btnCancelOrder_Click);
             // 
             // frmOrder
             // 
+            this.AcceptButton = this.btnConfirmOrder;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelOrder;
             this.ClientSize = new System.Drawing.Size(915, 539);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximumSize = new System.Drawing.Size(931, 578);
+            this.MinimumSize = new System.Drawing.Size(931, 578);
             this.Name = "frmOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Order";
@@ -610,7 +495,6 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
@@ -618,28 +502,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnCancelOrder;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbTotalPrice;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnAddBook;
         private System.Windows.Forms.Button btnRemoveBook;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtAddress;
-        private System.Windows.Forms.TextBox txtCustomerName;
-        private System.Windows.Forms.MaskedTextBox mskPhoneNo;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.NumericUpDown numQuantity;
@@ -654,8 +527,6 @@
         private System.Windows.Forms.ComboBox cmbBookTitle;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.Button btnConfirmOrder;
-        private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.DataGridView dgvOrderDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -665,5 +536,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnConfirmOrder;
+        private System.Windows.Forms.Button btnCancelOrder;
     }
 }

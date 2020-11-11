@@ -1,6 +1,6 @@
 ﻿using WinForms.Models;
 
-namespace WinFroms.Models.Models
+namespace WinForms.Models.Models
 {
     public class OrderDetailModel
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,40 +8,24 @@ using BusinessObjects;
 using WinForms.Models;
 using WinForms.Presenters;
 using WinForms.Views;
-using WinFroms.Presenters;
-using WinFroms.Views;
 
-namespace WinFroms
+namespace WinForms
 {
-    public partial class frmOrder : Form, IOrderView, IBooksView, IBookView, ICustomerView, IOrderDetailView
+    public partial class frmOrder : Form, IOrderView, IBooksView, IBookView, IOrderDetailView
     {
         private OrderPresenter orderPresenter;
         private BooksPresenter booksPresenter;
-        private CustomerPresenter customerPresenter;
+        private BookPresenter bookPresenter;
         private OrderDetailPresenter orderDetailPresenter;
         public frmOrder(Customers customers)
         {
             InitializeComponent();
             try
             {
-                customerPresenter = new CustomerPresenter(this);
                 booksPresenter = new BooksPresenter(this);
+                bookPresenter = new BookPresenter(this);
                 orderPresenter = new OrderPresenter(this);
                 orderDetailPresenter = new OrderDetailPresenter(this);
-                
-                txtCustomerName.DataBindings.Clear();
-                txtAddress.DataBindings.Clear();
-                txtEmail.DataBindings.Clear();
-                mskPhoneNo.DataBindings.Clear();
-
-                if (customers != null)
-                {
-                    txtCustomerName.DataBindings.Add("Text", customers, "CustomerName");
-                    txtAddress.DataBindings.Add("Text", customers, "Address");
-                    txtEmail.DataBindings.Add("Text", customers, "Email");
-                    mskPhoneNo.DataBindings.Add("Text", customers, "CustomerPhoneNo");
-                }
-
             }
             catch (Exception ex)
             {
@@ -51,6 +36,7 @@ namespace WinFroms
             txtPublisher.Enabled = false;
             txtPrice.Enabled = false;
             lbTotalPrice.Text = string.Empty;
+            PhoneNo = customers.CustomerPhoneNo;
         }
 
         private void btnCancelOrder_Click(object sender, EventArgs e)
@@ -59,24 +45,28 @@ namespace WinFroms
         }
 
         private void btnConfirmOrder_Click(object sender, EventArgs e)
-        {   
+        {
+            if (dgvOrderDetails.Rows.Count <= 1)
+            {
+                MessageBox.Show("Add more books to confirm purchase", "No books");
+                return;
+            }
+
             try
             {
-                //customerPresenter.Save();
                 orderPresenter.ConfirmOrder();
+
                 foreach (DataGridViewRow item in dgvOrderDetails.Rows)
                 {
                     if (dgvOrderDetails.Rows.Count != item.Index + 1)
                     {
                         OrderDetailID = 0;
-                        DetailBookId = Convert.ToInt32(item.Cells[0].Value.ToString());
-                        //DetailBookTitle = item.Cells[1].Value.ToString();
+                        DetailBookID = Convert.ToInt32(item.Cells[0].Value.ToString());
                         DetailQuantity = Convert.ToInt32(item.Cells[5].Value.ToString());
+                        bookPresenter.UpdateBookQuantity(DetailBookID, DetailQuantity);
                         orderDetailPresenter.ConfirmOrderDetail(OrderID);
-                        
                     }
                 }
-
             }
             catch (ApplicationException ex)
             {
@@ -95,10 +85,84 @@ namespace WinFroms
             if (books == null) return;
             cmbBookTitle.DataSource = books;
             cmbBookTitle.DisplayMember = "BookTitle";
+
         }
 
-       
-        public IList<OrderModel> Orders { get; set; }
+        private void btnAddBook_Click_1(object sender, EventArgs e)
+        {
+            if (numQuantity.Value <= 0) return;
+
+            DataGridViewRow row = (DataGridViewRow)dgvOrderDetails.Rows[0].Clone();
+            if (row == null) return;
+            
+            ID = ((BookModel)cmbBookTitle.SelectedItem).BookID;
+
+            bool flag = false;
+            int index = 0;           
+
+            for (int i = 0; i<dgvOrderDetails.Rows.Count-1; i++)
+            {
+                if (ID == int.Parse(dgvOrderDetails.Rows[i].Cells[0].Value.ToString()))
+                {
+                    index = i;
+                    flag = true;                    
+                }                
+            }
+
+            if (flag == false)
+            {
+                row.Cells[0].Value = ((BookModel)cmbBookTitle.SelectedItem).BookID;
+                row.Cells[1].Value = ((BookModel)cmbBookTitle.SelectedItem).BookTitle;
+                row.Cells[2].Value = ((BookModel)cmbBookTitle.SelectedItem).Author;
+                row.Cells[3].Value = ((BookModel)cmbBookTitle.SelectedItem).Publisher;
+                row.Cells[4].Value = ((BookModel)cmbBookTitle.SelectedItem).Price.ToString(CultureInfo.CurrentCulture);
+                row.Cells[5].Value = numQuantity.Text;
+                row.Cells[6].Value = double.Parse(row.Cells[4].Value.ToString()) * double.Parse(row.Cells[5].Value.ToString());
+                dgvOrderDetails.Rows.Add(row);
+            }
+            else
+            {
+                DetailQuantity = int.Parse(numQuantity.Text);
+                if ((DetailQuantity + int.Parse(dgvOrderDetails.Rows[index].Cells[5].Value.ToString())) >= numQuantity.Maximum)
+                {
+                    dgvOrderDetails.Rows[index].Cells[5].Value = numQuantity.Maximum;                    
+                }
+                else
+                {
+                    dgvOrderDetails.Rows[index].Cells[5].Value = (DetailQuantity + int.Parse(dgvOrderDetails.Rows[index].Cells[5].Value.ToString()));                    
+                }
+                dgvOrderDetails.Rows[index].Cells[6].Value = double.Parse(dgvOrderDetails.Rows[index].Cells[4].Value.ToString())
+                    * double.Parse(dgvOrderDetails.Rows[index].Cells[5].Value.ToString());
+            }            
+
+            lbTotalPrice.Text = dgvOrderDetails.Rows.Cast<DataGridViewRow>()
+                        .Sum(t => Convert.ToDouble(t.Cells[6].Value)).ToString(CultureInfo.InvariantCulture);
+            TotalPrice = Convert.ToDouble(lbTotalPrice.Text);
+        }
+
+        private void cmbBookTitle_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            txtAuthor.Text = ((BookModel)cmbBookTitle.SelectedItem).Author;
+            txtPublisher.Text = ((BookModel)cmbBookTitle.SelectedItem).Publisher;
+            txtPrice.Text = ((BookModel)cmbBookTitle.SelectedItem).Price.ToString(CultureInfo.CurrentCulture);
+            numQuantity.Maximum = ((BookModel)cmbBookTitle.SelectedItem).Quantity;
+        }
+
+        private void btnRemoveBook_Click(object sender, EventArgs e)
+        {
+            if (dgvOrderDetails.Rows.Count <= 1) return;
+            foreach (DataGridViewRow item in this.dgvOrderDetails.SelectedRows)
+            {
+                if (dgvOrderDetails.Rows.Count != item.Index+1)
+                    dgvOrderDetails.Rows.RemoveAt(item.Index);
+            }
+            lbTotalPrice.Text = dgvOrderDetails.Rows.Cast<DataGridViewRow>()
+                        .Sum(t => Convert.ToDouble(t.Cells[6].Value)).ToString(CultureInfo.InvariantCulture);
+            TotalPrice = Convert.ToDouble(lbTotalPrice.Text);
+        }
+
+
+        #region Book Properties
 
         public IList<BookModel> Books
         {
@@ -117,47 +181,24 @@ namespace WinFroms
             get => ((Books)cmbBookTitle.SelectedItem).Author;
             set => txtAuthor.Text = value;
         }
-
         public string Publisher { get; set; }
         public DateTime PublishDate { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
 
-        public string OrderID
-        {
-            get ; 
-            set ;
-        }
+        #endregion
 
-        //Phone No Form 
-        public string PhoneNo
-        {
-            get => mskPhoneNo.Text;
-            set => mskPhoneNo.Text = value;
-        }
+        #region Customer
 
-        //Customer View
-        public string CustomerName
-        {
-            get => txtCustomerName.Text; 
-            set => txtCustomerName.Text = value;
-        }
+        public string PhoneNo { get; set; }
 
-        public string Email
-        {
-            get => txtEmail.Text; 
-            set => txtEmail.Text = value;
-        }
-        public string Address { 
-            get => txtAddress.Text; 
-            set => txtAddress.Text = value;
-        }
+        #endregion
 
-        public string CustomerPhoneNo
-        {
-            get => PhoneNo;
-            set => PhoneNo = value;
-        }
+        #region Order Properties
+
+        public IList<OrderModel> Orders { get; set; }
+
+        public string OrderID { get; set; }
 
         public DateTime DateOfReceipt
         {
@@ -165,54 +206,20 @@ namespace WinFroms
             set => throw new NotImplementedException();
         }
 
-        public double SubPrice => (double) numQuantity.Value * ((BookModel) cmbBookTitle.SelectedItem).Price;
-
         public double TotalPrice { get; set; }
 
-        private void btnAddBook_Click_1(object sender, EventArgs e)
-        {
-            DataGridViewRow row = (DataGridViewRow)dgvOrderDetails.Rows[0].Clone();
-            if (row == null) return;
-            row.Cells[0].Value = ((BookModel)cmbBookTitle.SelectedItem).BookID;
-            row.Cells[1].Value = ((BookModel)cmbBookTitle.SelectedItem).BookTitle;
-            row.Cells[2].Value = ((BookModel)cmbBookTitle.SelectedItem).Author;
-            row.Cells[3].Value = ((BookModel)cmbBookTitle.SelectedItem).Publisher;
-            row.Cells[4].Value = ((BookModel)cmbBookTitle.SelectedItem).Price.ToString(CultureInfo.CurrentCulture);
-            row.Cells[5].Value = numQuantity.Text;
-            row.Cells[6].Value = SubPrice;
-            dgvOrderDetails.Rows.Add(row);
-            lbTotalPrice.Text = dgvOrderDetails.Rows.Cast<DataGridViewRow>()
-                .Sum(t => Convert.ToDouble(t.Cells[6].Value)).ToString(CultureInfo.InvariantCulture);
-            TotalPrice = Convert.ToDouble(lbTotalPrice.Text);
-        }
+        #endregion
 
-        private void cmbBookTitle_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            txtAuthor.Text = ((BookModel)cmbBookTitle.SelectedItem).Author;
-            txtPublisher.Text = ((BookModel)cmbBookTitle.SelectedItem).Publisher;
-            txtPrice.Text = ((BookModel)cmbBookTitle.SelectedItem).Price.ToString(CultureInfo.CurrentCulture);
-        }
+        #region Order Detail Properties
 
-        private void btnRemoveBook_Click(object sender, EventArgs e)
-        {
-            if (dgvOrderDetails.Rows.Count <= 1) return;
-            foreach (DataGridViewRow item in this.dgvOrderDetails.SelectedRows)
-            {
-                if (dgvOrderDetails.Rows.Count != item.Index+1)
-                    dgvOrderDetails.Rows.RemoveAt(item.Index);
-            }
-        }
-
-        //Detail 
         public int OrderDetailID { get; set; }
-
-        public string DetailOrderID
-        {
-            get ;
-            set ;
-        }
+        public string DetailOrderID { get; set; }
         public string DetailBookTitle { get; set; }
-        public int DetailBookId { get; set; }
-        public int DetailQuantity { get; set; }
+        public int DetailBookID { get; set; }
+        public int DetailQuantity { get; set; }        
+
+        #endregion
+        
+        
     }
 }

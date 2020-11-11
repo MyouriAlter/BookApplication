@@ -7,14 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinForms.Presenters;
+using WinForms.Views;
 
 namespace BookSaleApp
 {
-    public partial class frmLogin : Form
+    public partial class frmLogin : Form, ILoginView
     {
+        public string Username 
+        {
+            get => txtUsername.Text.Trim();            
+        }
+
+        public string Password 
+        { 
+            get => txtPassword.Text.Trim();
+        }
+
+        private LoginPresenter loginPresenter;
+
         public frmLogin()
         {
             InitializeComponent();
+            try
+            {
+                loginPresenter = new LoginPresenter(this);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -24,8 +46,23 @@ namespace BookSaleApp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            frmManager manager = new frmManager();
-            manager.Show();
+            if (loginPresenter.Login(Username, Password) == true)
+            {
+                frmMain newFrmMain = new frmMain();
+                newFrmMain.FormClosing += frmLogin_Load;
+                newFrmMain.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Login");
+            }
+
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            this.Show();
         }
     }
 }

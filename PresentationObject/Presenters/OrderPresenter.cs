@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessObjects;
+
 using WinForms.Models;
-using WinForms.Presenters;
 using WinForms.Views;
 
 namespace WinForms.Presenters
@@ -30,6 +29,12 @@ namespace WinForms.Presenters
             };
             Model.AddOrders(order);
             View.OrderID = order.OrderID;
+        }
+
+        public void DeleteOrder(string orderID)
+        {
+            Model.DeleteAllOrderDetails(orderID);
+            Model.DeleteOrders(orderID);
         }
 
     }

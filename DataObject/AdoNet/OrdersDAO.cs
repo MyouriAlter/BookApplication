@@ -62,12 +62,8 @@ namespace DataObject.AdoNet
         new Orders
         {
             OrderID = reader["OrderID"].AsString(),
-            //PhoneNo = reader["PhoneNo"].AsString(),
             DateOfReceipt = reader["DateOfReceipt"].AsDateTime(),
-            //OrderDate = reader["OrderDate"].AsDateTime(),
-            //ShippedDate = reader["ShippedDate"].AsDateTime(),
             TotalPrice = reader["TotalPrice"].AsDouble(),
-            //Completed = reader["Completed"].AsBool()
         };
 
         static Func<IDataReader, string> MakeOrderID = reader =>
@@ -83,11 +79,8 @@ namespace DataObject.AdoNet
             {
                 "@OrderID", order.OrderID,
                 "@PhoneNo", order.Customers.CustomerPhoneNo,
-                //"@OrderDate", order.OrderDate,
-                //"@ShippedDate", order.ShippedDate,
                 "@DateOfReceipt", order.DateOfReceipt,
                 "@TotalPrice", order.TotalPrice
-                //"@Completed", order.Completed
             };
         }
 

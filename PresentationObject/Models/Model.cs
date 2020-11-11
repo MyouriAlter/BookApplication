@@ -7,7 +7,7 @@ using BusinessObjects;
 using ActionService;
 using AutoMapper;
 using BusinessObjects.BusinessRules;
-using WinFroms.Models.Models;
+using WinForms.Models.Models;
 
 namespace WinForms.Models
 {
@@ -76,7 +76,15 @@ namespace WinForms.Models
         public void AddCustomers(CustomerModel model)
         {
             var customer = Mapper.Map<CustomerModel, Customers>(model);
-            service.AddCustomer(customer);
+            try
+            {
+                service.AddCustomer(customer);
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         // updates an existing Customer in the database.
@@ -137,6 +145,11 @@ namespace WinForms.Models
             service.DeleteBook(bookID);
         }
 
+        public void UpdateBookQuantity(int BookID, int Quantity)
+        {
+            service.UpdateBookQuantity(BookID, Quantity);
+        }
+
         #endregion
 
         #region Orders
@@ -180,7 +193,7 @@ namespace WinForms.Models
         public void DeleteOrders(string orderID)
         {
             var order = service.GetOrder(orderID);
-            service.DeleteCustomer(orderID);
+            service.DeleteOrder(orderID);
         }
         public string GenerateOrderID()
         {
@@ -208,6 +221,7 @@ namespace WinForms.Models
             var orderDetails = service.GetOrderDetails(OrderID);
             return Mapper.Map<List<OrderDetails>, List<OrderDetailModel>>(orderDetails);
         }
+
 
         #endregion
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WinFroms.Models.Models;
+using WinForms.Models.Models;
 
 namespace WinForms.Models
 {

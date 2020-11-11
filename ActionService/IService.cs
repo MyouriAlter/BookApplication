@@ -20,6 +20,7 @@ namespace ActionService
         bool AddNewBook(Books book);
         bool UpdateBook(Books book);
         bool DeleteBook(int BookID);
+        bool UpdateBookQuantity(int BookID, int Quantity);
 
         //Customer repo
         Customers GetCustomer(string PhoneNo);

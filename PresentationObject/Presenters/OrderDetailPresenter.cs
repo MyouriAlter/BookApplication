@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinForms.Models;
-using WinForms.Presenters;
 using WinForms.Views;
-using WinFroms.Models.Models;
-using WinFroms.Views;
+using WinForms.Models.Models;
 
-namespace WinFroms.Presenters
+namespace WinForms.Presenters
 {
     public class OrderDetailPresenter : Presenter<IOrderDetailView>
     {
@@ -27,7 +25,7 @@ namespace WinFroms.Presenters
                 {
                     OrderID = OrderID
                 },
-                BookID = View.DetailBookId,
+                BookID = View.DetailBookID,
                 //BookTitle = View.DetailBookTitle,
                 Quantity = View.DetailQuantity,
                 

@@ -1,4 +1,7 @@
-﻿using WinForms.Models;
+﻿using System;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using WinForms.Models;
 using WinForms.Presenters;
 using WinForms.Views;
 
@@ -41,8 +44,9 @@ namespace WinForms.Presenters
         /// Saves a customer by getting view data and sending it to model.
         /// </summary>
         /// <returns>Number of records affected.</returns>
-        public void Save()
+        public void Save(bool action)
         {
+            
             var customer = new CustomerModel
             {
                 CustomerPhoneNo = View.CustomerPhoneNo,
@@ -50,11 +54,15 @@ namespace WinForms.Presenters
                 Email = View.Email,
                 Address = View.Address
             };
-            
-            if (customer.CustomerPhoneNo != string.Empty)
+
+            if (action == true)
+            {
                 Model.AddCustomers(customer);
-            //else
-            //    Model.UpdateCustomers(customer);
+            }
+            else
+            {
+                Model.UpdateCustomers(customer);
+            }
         }
 
         /// <summary>

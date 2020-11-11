@@ -26,5 +26,7 @@ namespace DataObject
 
         //Get books by title
         List<Books> GetBooksByTitle(string BookTitle);
+
+        bool UpdateBookQuantity(int BookID, int Quantity);
     }
 }

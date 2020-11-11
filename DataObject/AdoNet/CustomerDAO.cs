@@ -15,7 +15,14 @@ namespace DataObject.AdoNet
         public bool AddCustomer(Customers customer)
         {
             string sql = "spAddNewCustomer";
-            return customer.CustomerPhoneNo == db.Insert(sql, Take(customer)).ToString();
+            try
+            {
+                return customer.CustomerPhoneNo == db.Insert(sql, Take(customer)).ToString();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public bool DeleteCustomer(string PhoneNo)
