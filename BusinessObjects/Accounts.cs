@@ -7,17 +7,10 @@ using BusinessObjects.BusinessRules;
 
 namespace BusinessObjects
 {
-    public class Accounts : BusinessObject
+    public class Accounts
     {
         public Accounts()
         {
-            AddRule(new ValidateRequired("Username"));
-            AddRule(new ValidateLength("Username", 1, 30));
-
-            AddRule(new ValidateRequired("Password"));
-            AddRule(new ValidateLength("Password", 1, 30));
-
-            AddRule(new ValidateRequired("Role"));
 
         }
 

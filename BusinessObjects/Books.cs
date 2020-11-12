@@ -8,30 +8,10 @@ using BusinessObjects.BusinessRules;
 
 namespace BusinessObjects
 {
-    public class Books : BusinessObject
+    public class Books
     {
         public Books()
         {
-            AddRule(new ValidateId("BookID"));
-            AddRule(new ValidateRequired("BookID"));
-
-            AddRule(new ValidateRequired("BookTitle"));
-            AddRule(new ValidateLength("BookTitle", 1, 100));
-
-            AddRule(new ValidateRequired("Address"));
-            AddRule(new ValidateLength("Address", 1, 100));
-
-
-            AddRule(new ValidateRequired("Publisher"));
-            AddRule(new ValidateLength("Publisher", 1, 100));
-
-
-            AddRule(new ValidateRequired("PublishDate"));
-            AddRule(new ValidateDate("PublishDate"));
-
-            AddRule(new ValidateRequired("Price"));
-            AddRule(new ValidatePrice("Price"));
-            AddRule(new ValidateLength("Price", 1, 100));
         }
 
         public int BookID { get; set; }

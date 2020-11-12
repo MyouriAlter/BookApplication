@@ -7,7 +7,7 @@ namespace BusinessObjects
     // ** Enterprise Design Pattern: Domain Model, Identity Field, Foreign key mapping
 
 
-    public class OrderDetails : BusinessObject
+    public class OrderDetails
     {
 
         // ** Enterprise Design Pattern: Identity field pattern
